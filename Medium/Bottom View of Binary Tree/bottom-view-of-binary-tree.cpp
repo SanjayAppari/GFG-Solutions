@@ -105,16 +105,13 @@ class Solution {
             auto p=q.front();
             q.pop();
             Node *ptr=p.first;
-            int vert=p.second;
-            m[vert]=ptr->data;
-            if(ptr->left) q.push({ptr->left,vert-1});
-            if(ptr->right) q.push({ptr->right,vert+1});
+            int ver=p.second;
+            m[ver]=ptr->data;
+            if(ptr->left) q.push({ptr->left,ver-1});
+            if(ptr->right) q.push({ptr->right,ver+1});
         }
-        
         vector<int>v;
-        for(auto i:m){
-            v.push_back(i.second);
-        }
+        for(auto i:m) v.push_back(i.second);
         return v;
     }
 };
