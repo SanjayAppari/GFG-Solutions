@@ -44,23 +44,32 @@ class Solution{
   public:
     // Should return head of the modified linked list
     Node *sortedInsert(struct Node* head, int data) {
-        struct Node* ptr=new Node(data);
-        if(head==NULL) return ptr;
-        if(head->data>=data) {
-            ptr->next=head;
-            return ptr;
-        }
         Node *temp=head;
-        while(temp->next){
-            if(temp->data<=data && data<=temp->next->data){
-                ptr->next=temp->next;
-                temp->next=ptr;
-                return head;
-            }
-            temp=temp->next;
+        Node *ptr=new Node(data);
+        Node *ptr2=new Node(1);
+        if(temp->data>=ptr->data){
+            ptr->next=head;
+            head=ptr;
+            return head;
         }
-        temp->next=ptr;
+        while(temp!=NULL){
+            if(temp->data<ptr->data){
+                if(temp->next==NULL) {temp->next=ptr; return head;}
+                temp=temp->next;
+            }
+            else if(temp->data>=ptr->data){
+                ptr2->data=temp->data;
+                temp->data=ptr->data;
+                ptr->data=ptr2->data;
+                ptr2->next= temp->next;
+               temp->next=ptr;
+               ptr->next=ptr2->next;
+               delete(ptr2);
+               break;
+            }
+        }
         return head;
+
         
     }
 };
