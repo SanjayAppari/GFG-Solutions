@@ -7,19 +7,17 @@ class Solution {
   public:
     // Function to return Breadth First Traversal of given graph.
     vector<int> bfsOfGraph(int V, vector<int> adj[]) {
-        // Code here
+        vector<int>ans;
         queue<int>q;
+        vector<bool>vis(V+1,false);
         q.push(0);
-        // int n=adj.size();
-        vector<int>v(V,0),ans;
-        v[0]=1;
+        vis[0]=1;
         while(!q.empty()){
             int node = q.front(); q.pop();
             ans.push_back(node);
             for(auto i:adj[node]){
-                if(v[i]==0){
-                    q.push(i);
-                    v[i]=1;
+                if(!vis[i]){
+                    q.push(i); vis[i]=1;
                 }
             }
         }
