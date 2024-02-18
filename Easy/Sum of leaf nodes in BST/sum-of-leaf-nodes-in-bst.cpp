@@ -20,11 +20,32 @@ struct Node
 };
 
 Node *insert(Node *r,int num);
-int sumOfLeafNodes(Node *r);
 void preOrderDisplay(Node *r);
 void inOrderDisplay(Node *r);
 void postOrderDisplay(Node *r);
 int search(Node *r, int num);
+
+
+// } Driver Code Ends
+/* The structure of Node
+struct Node{
+    int data;
+    Node *left,*right;
+}; */
+
+
+class Solution
+{
+    public:
+        /*You are required to complete below method */
+        int sumOfLeafNodes(Node *root ){
+            if(root==NULL) return 0;
+            if(root->left==NULL && root->right==NULL) return root->data;
+            return sumOfLeafNodes(root->left) + sumOfLeafNodes(root->right);
+        }
+};
+
+//{ Driver Code Starts.
 
 int main(void) {
     int t,n,data;
@@ -39,7 +60,8 @@ int main(void) {
             root=insert(root,data);
         }
         //inOrderDisplay(root);
-        printf("%d\n",sumOfLeafNodes(root));
+        Solution obj;
+        printf("%d\n",obj.sumOfLeafNodes(root));
     }
 	return 0;
 }
@@ -90,25 +112,3 @@ int search(Node *r,int num){
         search(r->right,num);
 }
 // } Driver Code Ends
-
-
-/* The structure of Node
-struct Node{
-    int data;
-    Node *left,*right;
-}; */
-
-
-/*You are required to complete below method */
-int sumOfLeafNodes(Node *r ){
-    if(r==NULL) return 0;
-    
-    if(r->left==NULL && r->right==NULL) return r->data;
-    
-    int lsum=sumOfLeafNodes(r->left);
-    int rsum=sumOfLeafNodes(r->right);
-    
-    return lsum+rsum;
-    
-    
-}
